@@ -1,12 +1,13 @@
 # sunspot-docs
 
-Supporting documentation for [Sunspot](https://apps.apple.com/us/app/sunspot/id914312702) app.
+Supporting documentation and website for [Sunspot](https://apps.apple.com/us/app/sunspot/id914312702) app.
 
 ## Project Structure
 
 ```
-src/                    # Source files (editable)
+src/                   # Source files (editable)
 ├── index.html         # Main HTML file
+├── privacy.html       # Privacy HTML file
 └── assets/            # Images and static files
 
 docs/                  # Built output (auto-generated, deployed to GitHub Pages)
