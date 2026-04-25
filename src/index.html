@@ -1,518 +1,706 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sunspot — Solar Compass for Photographers</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<template id="__bundler_thumbnail" data-bg-color="#F39237">
-  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="800" fill="#F39237"/>
-    <g transform="translate(600,400)" fill="none" stroke="#ffffff" stroke-width="3">
-      <circle r="220"/>
-      <circle r="190" stroke-dasharray="2,10"/>
-      <path d="M -220 0 A 220 220 0 0 1 220 0" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="-220" cy="0" r="10" fill="#ffffff"/>
-      <circle cx="220" cy="0" r="14" fill="#ffffff"/>
-    </g>
-    <text x="600" y="720" text-anchor="middle" font-family="'Barlow Condensed', sans-serif" font-weight="700" font-size="68" fill="#ffffff" letter-spacing="6">SUNSPOT</text>
-  </svg>
-</template>
-<style>
-  :root {
-    --c-sunrise: #F39237;
-    --c-golden:  #6E6688;
-    --c-dawn:    #3E89A8;
-    --c-sunset:  #E5697A;
-    --c-dusk:    #4A5365;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sunspot — Solar Compass for Photographers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <template id="__bundler_thumbnail" data-bg-color="#F39237">
+      <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1200" height="800" fill="#F39237" />
+        <g
+          transform="translate(600,400)"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="3"
+        >
+          <circle r="220" />
+          <circle r="190" stroke-dasharray="2,10" />
+          <path
+            d="M -220 0 A 220 220 0 0 1 220 0"
+            stroke-width="5"
+            stroke-linecap="round"
+          />
+          <circle cx="-220" cy="0" r="10" fill="#ffffff" />
+          <circle cx="220" cy="0" r="14" fill="#ffffff" />
+        </g>
+        <text
+          x="600"
+          y="720"
+          text-anchor="middle"
+          font-family="'Barlow Condensed', sans-serif"
+          font-weight="700"
+          font-size="68"
+          fill="#ffffff"
+          letter-spacing="6"
+        >
+          SUNSPOT
+        </text>
+      </svg>
+    </template>
+    <style>
+      :root {
+        --c-sunrise: #f39237;
+        --c-golden: #6e6688;
+        --c-dawn: #3e89a8;
+        --c-sunset: #e5697a;
+        --c-dusk: #4a5365;
 
-    --ink: #15181F;
-    --ink-2: #2a2e38;
-    --paper: #F5F1EA;
-    --paper-2: #EBE5DA;
-    --line: rgba(21,24,31,0.14);
-    --muted: rgba(21,24,31,0.55);
+        --ink: #15181f;
+        --ink-2: #2a2e38;
+        --paper: #f5f1ea;
+        --paper-2: #ebe5da;
+        --line: rgba(21, 24, 31, 0.14);
+        --muted: rgba(21, 24, 31, 0.55);
 
-    --display: 'Barlow Condensed', 'Helvetica Neue', sans-serif;
-    --mono: 'JetBrains Mono', ui-monospace, monospace;
-  }
+        --display: "Barlow Condensed", "Helvetica Neue", sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, monospace;
+      }
 
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--display);
-    font-size: 18px;
-    line-height: 1.45;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  a { color: inherit; text-decoration: none; }
-  button { font-family: inherit; cursor: pointer; }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: 18px;
+        line-height: 1.45;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
 
-  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
 
-  /* ---------- NAV ---------- */
-  .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 50; }
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 76px;
-    color: #fff;
-  }
-  .brand {
-    display: flex; align-items: center; gap: 12px;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 26px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  .brand-mark {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    border: 1.5px solid currentColor;
-    position: relative;
-  }
-  .brand-mark::before {
-    content: ""; position: absolute; inset: 3px;
-    border-radius: 50%; border: 1px dotted currentColor;
-  }
-  .brand-mark::after {
-    content: ""; position: absolute;
-    width: 7px; height: 7px; border-radius: 50%;
-    background: currentColor;
-    top: -2px; left: 50%; transform: translateX(-50%);
-  }
-  .nav-meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.85;
-  }
+      /* ---------- NAV ---------- */
+      .nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 76px;
+        color: #fff;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 26px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1.5px solid currentColor;
+        position: relative;
+      }
+      .brand-mark::before {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border-radius: 50%;
+        border: 1px dotted currentColor;
+      }
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .nav-meta {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        opacity: 0.85;
+      }
 
-  /* ---------- HERO ---------- */
-  .hero {
-    position: relative;
-    overflow: hidden;
-    background: var(--c-sunrise);
-    color: #fff;
-    transition: background-color 1400ms ease;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 120px 0 60px;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 56px;
-    align-items: center;
-    width: 100%;
-  }
+      /* ---------- HERO ---------- */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background: var(--c-sunrise);
+        color: #fff;
+        transition: background-color 1400ms ease;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 120px 0 60px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 56px;
+        align-items: center;
+        width: 100%;
+      }
 
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    opacity: 0.85;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  .eyebrow::before {
-    content: ""; width: 32px; height: 1px; background: currentColor; opacity: 0.6;
-  }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        opacity: 0.85;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 32px;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.6;
+      }
 
-  .hero h1 {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(64px, 9vw, 144px);
-    line-height: 0.88;
-    letter-spacing: -0.005em;
-    text-transform: uppercase;
-    margin: 0 0 28px;
-    text-wrap: balance;
-  }
-  .hero h1 em {
-    font-style: normal;
-    font-weight: 300;
-    opacity: 0.78;
-  }
+      .hero h1 {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(64px, 9vw, 144px);
+        line-height: 0.88;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+        margin: 0 0 28px;
+        text-wrap: balance;
+      }
+      .hero h1 em {
+        font-style: normal;
+        font-weight: 300;
+        opacity: 0.78;
+      }
 
-  .hero p.lede {
-    font-family: var(--display);
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 1.4;
-    max-width: 480px;
-    opacity: 0.95;
-    text-wrap: pretty;
-    margin: 0 0 36px;
-  }
+      .hero p.lede {
+        font-family: var(--display);
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 1.4;
+        max-width: 480px;
+        opacity: 0.95;
+        text-wrap: pretty;
+        margin: 0 0 36px;
+      }
 
-  .cta-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 12px;
-    padding: 16px 26px;
-    border-radius: 999px;
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    border: 1.5px solid currentColor;
-    transition: transform .15s ease, background .2s ease, color .2s ease;
-  }
-  .btn-primary { background: #fff; color: var(--ink); border-color: #fff; }
-  .btn-primary:hover { transform: translateY(-1px); }
-  .btn-ghost { background: transparent; color: #fff; }
-  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
-  .btn .arrow { font-size: 16px; }
+      .cta-row {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 26px;
+        border-radius: 999px;
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        border: 1.5px solid currentColor;
+        transition:
+          transform 0.15s ease,
+          background 0.2s ease,
+          color 0.2s ease;
+      }
+      .btn-primary {
+        background: #fff;
+        color: var(--ink);
+        border-color: #fff;
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: #fff;
+      }
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .btn .arrow {
+        font-size: 16px;
+      }
 
-  .hero-meta {
-    display: flex; gap: 28px; margin-top: 36px;
-    font-family: var(--mono); font-size: 11px;
-    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85;
-  }
+      .hero-meta {
+        display: flex;
+        gap: 28px;
+        margin-top: 36px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        opacity: 0.85;
+      }
 
-  /* ---------- PHONE ---------- */
-  .phone-stage {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .phone {
-    position: relative;
-    width: 258px;
-    aspect-ratio: 258 / 559;
-    border-radius: 38px;
-    overflow: hidden;
-    box-shadow:
-      0 50px 100px rgba(0,0,0,0.35),
-      0 20px 40px rgba(0,0,0,0.25),
-      0 0 0 7px rgba(0,0,0,0.85),
-      0 0 0 8px rgba(255,255,255,0.18);
-    transform: rotate(-2deg);
-  }
-  .phone img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    image-rendering: -webkit-optimize-contrast;
-    opacity: 0;
-    transition: opacity 900ms ease;
-  }
-  .phone img.is-active { opacity: 1; }
+      /* ---------- PHONE ---------- */
+      .phone-stage {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .phone {
+        position: relative;
+        width: 258px;
+        aspect-ratio: 258 / 559;
+        border-radius: 38px;
+        overflow: hidden;
+        box-shadow:
+          0 50px 100px rgba(0, 0, 0, 0.35),
+          0 20px 40px rgba(0, 0, 0, 0.25),
+          0 0 0 7px rgba(0, 0, 0, 0.85),
+          0 0 0 8px rgba(255, 255, 255, 0.18);
+        transform: rotate(-2deg);
+      }
+      .phone img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        image-rendering: -webkit-optimize-contrast;
+        opacity: 0;
+        transition: opacity 900ms ease;
+      }
+      .phone img.is-active {
+        opacity: 1;
+      }
 
-  .mood-row {
-    display: flex; gap: 8px;
-    margin-top: 28px;
-    justify-content: center;
-    flex-wrap: wrap;
-    font-family: var(--mono); font-size: 10px;
-    letter-spacing: 0.22em; text-transform: uppercase;
-  }
-  .mood-chip {
-    background: rgba(255,255,255,0.14);
-    border: 1px solid rgba(255,255,255,0.32);
-    color: #fff;
-    padding: 9px 14px;
-    border-radius: 999px;
-    backdrop-filter: blur(6px);
-    transition: background .2s ease, border-color .2s ease;
-  }
-  .mood-chip:hover { background: rgba(255,255,255,0.24); }
-  .mood-chip[aria-pressed="true"] {
-    background: #fff; color: var(--ink); border-color: #fff;
-  }
+      .mood-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 28px;
+        justify-content: center;
+        flex-wrap: wrap;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .mood-chip {
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        color: #fff;
+        padding: 9px 14px;
+        border-radius: 999px;
+        backdrop-filter: blur(6px);
+        transition:
+          background 0.2s ease,
+          border-color 0.2s ease;
+      }
+      .mood-chip:hover {
+        background: rgba(255, 255, 255, 0.24);
+      }
+      .mood-chip[aria-pressed="true"] {
+        background: #fff;
+        color: var(--ink);
+        border-color: #fff;
+      }
 
-  /* ---------- SUPPORT ---------- */
-  .support {
-    background: var(--paper);
-    color: var(--ink);
-    padding: 96px 0 72px;
-  }
-  .support-head {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 48px;
-    align-items: end;
-    margin-bottom: 56px;
-  }
-  .support-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .support-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(48px, 6vw, 84px);
-    line-height: 0.92;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    margin: 14px 0 0;
-    text-wrap: balance;
-  }
-  .support-lede {
-    font-family: var(--display);
-    font-size: 20px;
-    color: var(--ink-2);
-    max-width: 520px;
-    text-wrap: pretty;
-    margin: 18px 0 0;
-  }
+      /* ---------- SUPPORT ---------- */
+      .support {
+        background: var(--paper);
+        color: var(--ink);
+        padding: 96px 0 72px;
+      }
+      .support-head {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 48px;
+        align-items: end;
+        margin-bottom: 56px;
+      }
+      .support-num {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .support-title {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(48px, 6vw, 84px);
+        line-height: 0.92;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        margin: 14px 0 0;
+        text-wrap: balance;
+      }
+      .support-lede {
+        font-family: var(--display);
+        font-size: 20px;
+        color: var(--ink-2);
+        max-width: 520px;
+        text-wrap: pretty;
+        margin: 18px 0 0;
+      }
 
-  .support-cta { max-width: 560px; }
+      .support-cta {
+        max-width: 560px;
+      }
 
-  /* contact column */
-  .contact-card {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px;
-    padding: 22px 26px;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: #fff;
-    transition: transform .15s ease, border-color .2s ease;
-  }
-  .contact-card:hover { transform: translateY(-1px); border-color: var(--ink); }
-  .contact-card-label {
-    font-family: var(--mono); font-size: 10px;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--muted);
-  }
-  .contact-card-value {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    margin-top: 2px;
-  }
-  .contact-card-arrow {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    border: 1.5px solid var(--ink);
-    display: grid; place-items: center;
-    flex-shrink: 0;
-    font-size: 16px;
-  }
+      /* contact column */
+      .contact-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px 26px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+        transition:
+          transform 0.15s ease,
+          border-color 0.2s ease;
+      }
+      .contact-card:hover {
+        transform: translateY(-1px);
+        border-color: var(--ink);
+      }
+      .contact-card-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .contact-card-value {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 24px;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        margin-top: 2px;
+      }
+      .contact-card-arrow {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1.5px solid var(--ink);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        font-size: 16px;
+      }
 
-  /* faq column */
-  .faq-list { border-top: 1px solid var(--line); }
-  details.faq { border-bottom: 1px solid var(--line); }
-  details.faq summary {
-    list-style: none;
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: 1fr 32px;
-    gap: 16px;
-    align-items: center;
-    padding: 22px 0;
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 0.005em;
-  }
-  details.faq summary::-webkit-details-marker { display: none; }
-  .faq-toggle {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    border: 1.5px solid var(--ink);
-    position: relative;
-    justify-self: end;
-    transition: background .2s ease;
-  }
-  .faq-toggle::before, .faq-toggle::after {
-    content: ""; position: absolute;
-    background: var(--ink); transition: transform .25s ease;
-  }
-  .faq-toggle::before {
-    left: 50%; top: 50%; width: 12px; height: 1.5px;
-    transform: translate(-50%,-50%);
-  }
-  .faq-toggle::after {
-    left: 50%; top: 50%; width: 1.5px; height: 12px;
-    transform: translate(-50%,-50%);
-  }
-  details[open] .faq-toggle { background: var(--ink); }
-  details[open] .faq-toggle::before, details[open] .faq-toggle::after { background: var(--paper); }
-  details[open] .faq-toggle::after { transform: translate(-50%,-50%) scaleY(0); }
-  .faq-body {
-    padding: 0 0 24px;
-    color: var(--ink-2);
-    font-size: 17px;
-    line-height: 1.6;
-  }
-  .faq-body p { margin: 0 0 10px; }
-  .faq-body p:last-child { margin-bottom: 0; }
-  .faq-body strong { font-weight: 600; }
+      /* faq column */
+      .faq-list {
+        border-top: 1px solid var(--line);
+      }
+      details.faq {
+        border-bottom: 1px solid var(--line);
+      }
+      details.faq summary {
+        list-style: none;
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: 1fr 32px;
+        gap: 16px;
+        align-items: center;
+        padding: 22px 0;
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 24px;
+        text-transform: uppercase;
+        letter-spacing: 0.005em;
+      }
+      details.faq summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-toggle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1.5px solid var(--ink);
+        position: relative;
+        justify-self: end;
+        transition: background 0.2s ease;
+      }
+      .faq-toggle::before,
+      .faq-toggle::after {
+        content: "";
+        position: absolute;
+        background: var(--ink);
+        transition: transform 0.25s ease;
+      }
+      .faq-toggle::before {
+        left: 50%;
+        top: 50%;
+        width: 12px;
+        height: 1.5px;
+        transform: translate(-50%, -50%);
+      }
+      .faq-toggle::after {
+        left: 50%;
+        top: 50%;
+        width: 1.5px;
+        height: 12px;
+        transform: translate(-50%, -50%);
+      }
+      details[open] .faq-toggle {
+        background: var(--ink);
+      }
+      details[open] .faq-toggle::before,
+      details[open] .faq-toggle::after {
+        background: var(--paper);
+      }
+      details[open] .faq-toggle::after {
+        transform: translate(-50%, -50%) scaleY(0);
+      }
+      .faq-body {
+        padding: 0 0 24px;
+        color: var(--ink-2);
+        font-size: 17px;
+        line-height: 1.6;
+      }
+      .faq-body p {
+        margin: 0 0 10px;
+      }
+      .faq-body p:last-child {
+        margin-bottom: 0;
+      }
+      .faq-body strong {
+        font-weight: 600;
+      }
 
-  /* ---------- FOOTER ---------- */
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 32px 0;
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .foot-grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .foot-links { display: flex; gap: 22px; }
+      /* ---------- FOOTER ---------- */
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 32px 0;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .foot-grid {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .foot-links {
+        display: flex;
+        gap: 22px;
+      }
 
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 960px) {
-    .hero { padding: 100px 0 80px; min-height: 0; }
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .phone-stage { order: 2; }
-    .phone { width: 258px; }
-    .support-head { grid-template-columns: 1fr; gap: 16px; }
-    .nav-meta { display: none; }
-  }
-  @media (max-width: 560px) {
-    .wrap { padding: 0 20px; }
-    .phone { width: 220px; }
-    .hero h1 { font-size: 64px; }
-  }
-</style>
-</head>
-<body>
-
-<!-- ===================== NAV ===================== -->
-<nav class="nav">
-  <div class="wrap nav-inner">
-    <a class="brand" href="#top">
-      <span>Sunspot</span>
-    </a>
-  </div>
-</nav>
-
-<!-- ===================== HERO ===================== -->
-<header class="hero" id="top" data-mood="sunrise">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <div class="eyebrow">A solar compass for iOS</div>
-      <h1>Chase<br/>the <em>light.</em></h1>
-      <p class="lede">Spot where the sun is at, where it will rise and where it will set with a simple solar compass.</p>
-
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#" id="downloadBtn">
-          <span>Download on the App Store</span>
-          <span class="arrow">↗</span>
+      /* ---------- RESPONSIVE ---------- */
+      @media (max-width: 960px) {
+        .hero {
+          padding: 100px 0 80px;
+          min-height: 0;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .phone-stage {
+          order: 2;
+        }
+        .phone {
+          width: 258px;
+        }
+        .support-head {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        .nav-meta {
+          display: none;
+        }
+      }
+      @media (max-width: 560px) {
+        .wrap {
+          padding: 0 20px;
+        }
+        .phone {
+          width: 220px;
+        }
+        .hero h1 {
+          font-size: 64px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===================== NAV ===================== -->
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">
+          <span>Sunspot</span>
         </a>
-        <a class="btn btn-ghost" href="#support">Support</a>
       </div>
+    </nav>
 
-      <div class="hero-meta">
-        <span>34.27° N</span>
-        <span>150.95° E</span>
-        <span id="azReadout">AZ 094°</span>
-      </div>
-    </div>
+    <!-- ===================== HERO ===================== -->
+    <header class="hero" id="top" data-mood="sunrise">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">A solar compass for iOS</div>
+          <h1>Chase<br />the <em>light.</em></h1>
+          <p class="lede">
+            Spot where the sun is at, where it will rise and where it will set
+            with a simple solar compass.
+          </p>
 
-    <div>
-      <div class="phone-stage">
-        <div class="phone" aria-label="Sunspot screenshot">
-          <img src="assets/screen-dawn.png" alt="" data-mood="dawn" />
-          <img src="assets/screen-sunrise.png" alt="" data-mood="sunrise" class="is-active" />
-          <img src="assets/screen-golden.png" alt="" data-mood="golden" />
-          <img src="assets/screen-sunset.png" alt="" data-mood="sunset" />
-          <img src="assets/screen-dusk.png" alt="" data-mood="dusk" />
+          <div class="cta-row">
+            <a
+              class="btn btn-primary"
+              href="https://apps.apple.com/us/app/sunspot/id914312702"
+              id="downloadBtn"
+            >
+              <span>Download on the App Store</span>
+              <span class="arrow">↗</span>
+            </a>
+            <a class="btn btn-ghost" href="#support">Support</a>
+          </div>
+
+          <div class="hero-meta">
+            <span>34.27° N</span>
+            <span>150.95° E</span>
+            <span id="azReadout">AZ 094°</span>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</header>
 
-<!-- ===================== SUPPORT ===================== -->
-<section class="support" id="support">
-  <div class="wrap">
-    <div class="support-head">
-      <div>
-        <div class="support-num">01 — Help &amp; Contact</div>
-        <h2 class="support-title">Need a hand?</h2>
-        <p class="support-lede">For help, support, feature requests, or anything else — drop us a line at the email below. We read every message personally and reply within a day or two.</p>
-      </div>
-    </div>
-
-    <div class="support-cta">
-      <a class="contact-card" href="mailto:support@sunspotapp.com">
         <div>
-          <div class="contact-card-label">Email support</div>
-          <div class="contact-card-value">support@sunspotapp.com</div>
+          <div class="phone-stage">
+            <div class="phone" aria-label="Sunspot screenshot">
+              <img src="assets/screen-dawn.png" alt="" data-mood="dawn" />
+              <img
+                src="assets/screen-sunrise.png"
+                alt=""
+                data-mood="sunrise"
+                class="is-active"
+              />
+              <img src="assets/screen-golden.png" alt="" data-mood="golden" />
+              <img src="assets/screen-sunset.png" alt="" data-mood="sunset" />
+              <img src="assets/screen-dusk.png" alt="" data-mood="dusk" />
+            </div>
+          </div>
         </div>
-        <div class="contact-card-arrow" aria-hidden="true">→</div>
-      </a>
-    </div>
-  </div>
-</section>
+      </div>
+    </header>
 
-<!-- ===================== FOOTER ===================== -->
-<footer>
-  <div class="wrap foot-grid">
-    <div>© 2026 Sunspot</div>
-    <div class="foot-links">
-      <a href="#">Privacy</a>
-      <a href="#support">Support</a>
-    </div>
-  </div>
-</footer>
+    <!-- ===================== SUPPORT ===================== -->
+    <section class="support" id="support">
+      <div class="wrap">
+        <div class="support-head">
+          <div>
+            <div class="support-num">01 — Help &amp; Contact</div>
+            <h2 class="support-title">Need a hand?</h2>
+            <p class="support-lede">
+              For help, support, feature requests, or anything else — drop us a
+              line at the email below. We read every message personally and
+              reply within a day or two.
+            </p>
+          </div>
+        </div>
 
-<script>
-  const MOODS = {
-    dawn:    { bg: '#3E89A8', az: 'AZ 062°' },
-    sunrise: { bg: '#F39237', az: 'AZ 094°' },
-    golden:  { bg: '#6E6688', az: 'AZ 086°' },
-    sunset:  { bg: '#E5697A', az: 'AZ 266°' },
-    dusk:    { bg: '#4A5365', az: 'AZ 285°' },
-  };
+        <div class="support-cta">
+          <a class="contact-card" href="mailto:support@sunspotapp.com">
+            <div>
+              <div class="contact-card-label">Email support</div>
+              <div class="contact-card-value">support@sunspotapp.com</div>
+            </div>
+            <div class="contact-card-arrow" aria-hidden="true">→</div>
+          </a>
+        </div>
+      </div>
+    </section>
 
-  const hero = document.querySelector('.hero');
-  const azReadout = document.getElementById('azReadout');
-  const chips = document.querySelectorAll('.mood-chip');
-  const shots = document.querySelectorAll('.phone img');
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+      <div class="wrap foot-grid">
+        <div>© 2026 Sunspot</div>
+        <div class="foot-links">
+          <a href="#">Privacy</a>
+          <a href="#support">Support</a>
+        </div>
+      </div>
+    </footer>
 
-  function setMood(key) {
-    const m = MOODS[key];
-    if (!m) return;
-    hero.style.backgroundColor = m.bg;
-    azReadout.textContent = m.az;
-    chips.forEach(c => c.setAttribute('aria-pressed', c.dataset.mood === key ? 'true' : 'false'));
-    shots.forEach(img => img.classList.toggle('is-active', img.dataset.mood === key));
-  }
-  chips.forEach(c => c.addEventListener('click', () => {
-    setMood(c.dataset.mood);
-    clearInterval(auto);
-  }));
+    <script>
+      const MOODS = {
+        dawn: { bg: "#3E89A8", az: "AZ 062°" },
+        sunrise: { bg: "#F39237", az: "AZ 094°" },
+        golden: { bg: "#6E6688", az: "AZ 086°" },
+        sunset: { bg: "#E5697A", az: "AZ 266°" },
+        dusk: { bg: "#4A5365", az: "AZ 285°" },
+      };
 
-  const order = ['sunrise','golden','sunset','dusk','dawn'];
-  let idx = 0;
-  let auto = setInterval(() => {
-    idx = (idx + 1) % order.length;
-    setMood(order[idx]);
-  }, 4500);
-</script>
+      const hero = document.querySelector(".hero");
+      const azReadout = document.getElementById("azReadout");
+      const chips = document.querySelectorAll(".mood-chip");
+      const shots = document.querySelectorAll(".phone img");
 
-</body>
+      function setMood(key) {
+        const m = MOODS[key];
+        if (!m) return;
+        hero.style.backgroundColor = m.bg;
+        azReadout.textContent = m.az;
+        chips.forEach((c) =>
+          c.setAttribute(
+            "aria-pressed",
+            c.dataset.mood === key ? "true" : "false",
+          ),
+        );
+        shots.forEach((img) =>
+          img.classList.toggle("is-active", img.dataset.mood === key),
+        );
+      }
+      chips.forEach((c) =>
+        c.addEventListener("click", () => {
+          setMood(c.dataset.mood);
+          clearInterval(auto);
+        }),
+      );
+
+      const order = ["sunrise", "golden", "sunset", "dusk", "dawn"];
+      let idx = 0;
+      let auto = setInterval(() => {
+        idx = (idx + 1) % order.length;
+        setMood(order[idx]);
+      }, 4500);
+    </script>
+  </body>
 </html>
