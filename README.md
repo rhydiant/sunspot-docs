@@ -67,7 +67,9 @@ npm run preview
 
 The `docs/` folder is automatically deployed to GitHub Pages. After building:
 
-1. Commit and push changes:
+1. Run `npm run build` before committing to ensure `docs/` is up to date with your changes.
+
+2. Commit and push changes:
 
    ```bash
    git add .
@@ -75,6 +77,4 @@ The `docs/` folder is automatically deployed to GitHub Pages. After building:
    git push
    ```
 
-2. Changes to `docs/` will be live at https://rhydiant.github.io/sunspot-docs/
-
-> **Important:** Always run `npm run build` before committing to ensure `docs/` is up to date with your changes.
+3. Changes to `docs/` will be live at https://rhydiant.github.io/sunspot-docs/
