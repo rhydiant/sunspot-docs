@@ -5,7 +5,7 @@ Supporting documentation for [Sunspot](https://apps.apple.com/us/app/sunspot/id9
 ## Project Structure
 
 ```
-lib/                    # Source files (editable)
+src/                    # Source files (editable)
 ├── index.html         # Main HTML file
 └── assets/            # Images and static files
 
@@ -27,16 +27,16 @@ package.json           # Dependencies and scripts
 
 ## Making Edits
 
-All editable source files are in the `lib/` folder:
+All editable source files are in the `src/` folder:
 
-- **`lib/index.html`** — Main page HTML, styles, and content
-- **`lib/assets/`** — Images and other static files
+- **`src/index.html`** — Main page HTML, styles, and content
+- **`src/assets/`** — Images and other static files
 
 Edit these files directly in your editor.
 
 ## Building
 
-After making changes to `lib/`, build the project to generate the bundled output:
+After making changes to `src/`, build the project to generate the bundled output:
 
 ```bash
 npm run build
@@ -52,7 +52,7 @@ For live editing with hot reload:
 npm run dev
 ```
 
-Opens a dev server where changes in `lib/` are instantly reflected in the browser.
+Opens a dev server where changes in `src/` are instantly reflected in the browser.
 
 ## Preview
 
