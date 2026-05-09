@@ -830,8 +830,8 @@
     </footer>
 
     <script>
-      function trackDocsEvents() {
-        mixpanel.track("Docs Page Viewed", {
+      function trackWebsiteEvents() {
+        mixpanel.track("Website: Page Viewed", {
           page_name: document.title,
           page_path: window.location.pathname,
           page_url: window.location.href,
@@ -849,19 +849,19 @@
           });
         };
 
-        trackClick("downloadBtn", "Docs Download Clicked", {
+        trackClick("downloadBtn", "Website: Download Clicked", {
           destination: "app_store",
         });
-        trackClick("supportEmailBtn", "Docs Support Email Clicked", {
+        trackClick("supportEmailBtn", "Website: Support Email Clicked", {
           placement: "support_section",
         });
-        trackClick("footerSupportLink", "Docs Support Email Clicked", {
+        trackClick("footerSupportLink", "Website: Support Email Clicked", {
           placement: "footer",
         });
-        trackClick("privacyLink", "Docs Privacy Clicked");
+        trackClick("privacyLink", "Website: Privacy Clicked");
       }
 
-      trackDocsEvents();
+      trackWebsiteEvents();
 
       const MOODS = {
         dawn: { bg: "#3E89A8", az: "AZ 062°" },
