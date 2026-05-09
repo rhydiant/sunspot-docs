@@ -688,11 +688,16 @@
             b.get_group = function () {
               function d(p) {
                 a[p] = function () {
-                  b.push([g, [p].concat(Array.prototype.slice.call(arguments, 0))]);
+                  b.push([
+                    g,
+                    [p].concat(Array.prototype.slice.call(arguments, 0)),
+                  ]);
                 };
               }
               var a = {};
-              var g = ["get_group"].concat(Array.prototype.slice.call(arguments, 0));
+              var g = ["get_group"].concat(
+                Array.prototype.slice.call(arguments, 0),
+              );
               for (var m = 0; m < n.length; m++) {
                 d(n[m]);
               }
@@ -717,8 +722,8 @@
       })(document, window.mixpanel || []);
 
       mixpanel.init("24dfaf3e8d59910a0e9514562f937e9d", {
-        autocapture: true,
-        record_sessions_percent: 100,
+        autocapture: false,
+        record_sessions_percent: 0,
       });
     </script>
   </head>
