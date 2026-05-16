@@ -21,7 +21,12 @@ package.json           # Dependencies and scripts
 
 ## Setup
 
-1. **Install dependencies:**
+1. **Set Node version:**
+   ```bash
+   nvm use 22
+   ```
+
+2. **Install dependencies:**
    ```bash
    npm install
    ```

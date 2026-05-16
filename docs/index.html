@@ -413,6 +413,66 @@
         border-color: #fff;
       }
 
+      /* ---------- FEATURES ---------- */
+      .features {
+        background: var(--paper);
+        color: var(--ink);
+        padding: 96px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .features-head {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 48px;
+        align-items: end;
+        margin-bottom: 56px;
+      }
+      .features-num {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .features-title {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(48px, 6vw, 84px);
+        line-height: 0.92;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        margin: 14px 0 0;
+        text-wrap: balance;
+      }
+      .features-lede {
+        font-family: var(--display);
+        font-size: 20px;
+        color: var(--ink-2);
+        max-width: 520px;
+        text-wrap: pretty;
+        margin: 18px 0 0;
+      }
+
+      .features-list {
+        max-width: 600px;
+      }
+      .feature-item {
+        font-size: 16px;
+        color: var(--ink-2);
+        line-height: 1.8;
+        margin: 0 0 12px;
+        display: flex;
+        gap: 12px;
+      }
+      .feature-item:last-child {
+        margin-bottom: 0;
+      }
+      .feature-item::before {
+        content: "•";
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
       /* ---------- SUPPORT ---------- */
       .support {
         background: var(--paper);
@@ -622,6 +682,10 @@
           grid-template-columns: 1fr;
           gap: 16px;
         }
+        .features-head {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
         .nav-meta {
           display: none;
         }
@@ -784,6 +848,28 @@
         </div>
       </div>
     </header>
+
+    <!-- ===================== FEATURES ===================== -->
+    <section class="features" id="features">
+      <div class="wrap">
+        <div class="features-head">
+          <div>
+            <div class="features-num">Features</div>
+            <h2 class="features-title">Capture perfect light</h2>
+            <p class="features-lede">
+              Track and countdown to sunrise, sunset, blue/golden hours, and all solar events in between. Get a heads up on the weather forecast. Sunspot is the perfect companion app for photographers.
+            </p>
+          </div>
+        </div>
+
+        <ul class="features-list">
+          <li class="feature-item">Sun position at sunrise and sunset, relative to you</li>
+          <li class="feature-item">Sunrise, sunset, first/last light, morning and evening golden hour times and duration</li>
+          <li class="feature-item">Setup notifications for when a solar event is approaching</li>
+          <li class="feature-item">Customise the appearance with themes and light or dark modes</li>
+        </ul>
+      </div>
+    </section>
 
     <!-- ===================== SUPPORT ===================== -->
     <section class="support" id="support">
